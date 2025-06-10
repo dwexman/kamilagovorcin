@@ -1,15 +1,20 @@
+/* Contenedor principal */
 .homeWrapper {
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
 }
 
+/* Sección visual (imagen + paneles) */
 .visualSection {
   display: flex;
   align-items: stretch;
   justify-content: flex-start;
+  gap: 1rem;               /* separa imagen y texto */
+  position: relative;      /* para anclar los paneles absolutos en móvil */
 }
 
+/* Marco de imagen */
 .imageFrame {
   background-color: #F3DD15;
   padding: 0.75rem;
@@ -23,8 +28,8 @@
   border-radius: 6px;
   overflow: hidden;
   width: clamp(300px, 50vw, 600px);
-  aspect-ratio: 3 / 4; 
-  max-height: 574px; 
+  aspect-ratio: 3 / 4;
+  max-height: 574px;
   border: 10px solid #000;
 }
 
@@ -36,6 +41,7 @@
   display: block;
 }
 
+/* Paneles laterales */
 .yellowPanel {
   background-color: #F3DD15;
   width: clamp(40px, 6vw, 100px);
@@ -45,13 +51,14 @@
 
 .whitePanel {
   --checker-size: 20px;
-  background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 
+  background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%)
               50% / calc(var(--checker-size) * 2) calc(var(--checker-size) * 2);
   width: clamp(40px, 5vw, 80px);
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
+/* Sección de texto */
 .horizontalName {
   margin-left: -1rem;
   margin-top: -1rem;
@@ -74,12 +81,12 @@
   color: #fff;
   font-weight: bold;
   font-size: clamp(1rem, 1.25vw, 1.5rem);
-  max-width: 600px; 
+  max-width: 600px;
   line-height: 1.8;
 }
 
 /* -------------------------------------------- */
-/* RESPONSIVE PARA MÓVIL (menos de 768px) */
+/* RESPONSIVE PARA MÓVIL (menos de 768px)      */
 /* -------------------------------------------- */
 @media (max-width: 768px) {
   .homeWrapper {
@@ -90,6 +97,7 @@
   .visualSection {
     flex-direction: column;
     align-items: center;
+    /* position: relative; ya está definido fuera */
   }
 
   .imageFrame {
@@ -101,13 +109,27 @@
   .imageInner {
     width: 100%;
     max-height: none;
-    aspect-ratio: 3/4;
+    aspect-ratio: 3 / 4;
   }
 
-  /* Ocultamos paneles laterales en móvil */
-  .yellowPanel, 
+  /* Mostrar paneles sobre la imagen en móvil */
+  .yellowPanel,
   .whitePanel {
-    display: none;
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .yellowPanel {
+    left: 0;
+    width: clamp(20px, 6vw, 80px);
+  }
+
+  .whitePanel {
+    right: 0;
+    width: clamp(20px, 5vw, 60px);
   }
 
   /* Ajustes de texto */
@@ -133,7 +155,7 @@
 }
 
 /* -------------------------------------------- */
-/* AJUSTES PARA TABLETS (769px - 1024px) */
+/* AJUSTES PARA TABLETS (769px - 1024px)       */
 /* -------------------------------------------- */
 @media (min-width: 769px) and (max-width: 1024px) {
   .visualSection {
@@ -149,30 +171,11 @@
   .infoSection {
     margin-left: 0;
     padding-top: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .visualSection {
-    position: relative; 
+    width: 100%;
   }
 
-  .yellowPanel,
-  .whitePanel {
-    display: block !important;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .yellowPanel {
-    left: 0;
-    width: clamp(10px, 2vw, 60px); 
-  }
-
-  .whitePanel {
-    right: 0;
-    width: clamp(10px, 2vw, 40px);
+  .description {
+    max-width: 500px;
+    margin: 0 auto;
   }
 }
