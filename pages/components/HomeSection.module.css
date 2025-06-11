@@ -1,17 +1,14 @@
-/* Contenedor principal */
 .homeWrapper {
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
 }
 
-/* Sección visual (imagen + paneles) */
 .visualSection {
   display: flex;
   align-items: stretch;
-  justify-content: flex-start;
-  gap: 1rem;               /* separa imagen y texto */
-  position: relative;      /* para anclar los paneles absolutos en móvil */
+  justify-content: flex-start;      
+  position: relative; 
 }
 
 /* Marco de imagen */
@@ -41,11 +38,12 @@
   display: block;
 }
 
-/* Paneles laterales */
 .yellowPanel {
   background-color: #F3DD15;
   width: clamp(40px, 6vw, 100px);
-  margin-left: -8px;
+  margin-left: -1rem;              
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
   z-index: 1;
 }
 
@@ -54,6 +52,7 @@
   background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%)
               50% / calc(var(--checker-size) * 2) calc(var(--checker-size) * 2);
   width: clamp(40px, 5vw, 80px);
+  margin-left: 0rem;                
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -85,9 +84,10 @@
   line-height: 1.8;
 }
 
-/* -------------------------------------------- */
-/* RESPONSIVE PARA MÓVIL (menos de 768px)      */
-/* -------------------------------------------- */
+/* ---------------------------------------------------------- */
+/* RESPONSIVE PARA MÓVIL (≤ 768 px) — quita paneles y añade   */
+/* borde amarillo + tablero en la propia foto                 */
+/* ---------------------------------------------------------- */
 @media (max-width: 768px) {
   .homeWrapper {
     margin-left: 0;
@@ -97,39 +97,43 @@
   .visualSection {
     flex-direction: column;
     align-items: center;
-    /* position: relative; ya está definido fuera */
+    position: relative;
   }
 
+  /* Oculta los paneles laterales */
+  .yellowPanel,
+  .whitePanel {
+    display: none;
+  }
+
+  /* Imagen ocupa todo el ancho + nuevo borde */
   .imageFrame {
+    background: none;
+    padding: 0;
     width: 100%;
-    padding: 0.5rem;
     margin-bottom: 1rem;
   }
-
   .imageInner {
     width: 100%;
     max-height: none;
     aspect-ratio: 3 / 4;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 8px solid #F3DD15; 
+    position: relative;
   }
 
-  /* Mostrar paneles sobre la imagen en móvil */
-  .yellowPanel,
-  .whitePanel {
-    display: block;
+  /* Borde derecho a cuadros como pseudo-elemento */
+  .imageInner::after {
+    content: "";
     position: absolute;
-    top: 0;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .yellowPanel {
-    left: 0;
-    width: clamp(20px, 6vw, 80px);
-  }
-
-  .whitePanel {
-    right: 0;
-    width: clamp(20px, 5vw, 60px);
+    top: -8px;
+    bottom: -8px;
+    right: -8px;
+    width: 8px;
+    background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 8px 8px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
   }
 
   /* Ajustes de texto */
@@ -154,14 +158,14 @@
   }
 }
 
-/* -------------------------------------------- */
-/* AJUSTES PARA TABLETS (769px - 1024px)       */
-/* -------------------------------------------- */
+/* ---------------------------------------------------------- */
+/* AJUSTES PARA TABLETS (769 px – 1024 px)                    */
+/* ---------------------------------------------------------- */
 @media (min-width: 769px) and (max-width: 1024px) {
   .visualSection {
     flex-wrap: wrap;
   }
-  
+
   .imageFrame {
     width: 100%;
     max-width: 500px;
