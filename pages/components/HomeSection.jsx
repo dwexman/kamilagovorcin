@@ -10,7 +10,7 @@ export default function HomeSection() {
         <div className={styles.imageFrame}>
           <div className={styles.imageInner}>
             <Image
-              src="/images/homekg.jpg" 
+              src={homeKg} 
               alt="Home"
               width={1200}
               height={800}
