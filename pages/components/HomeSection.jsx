@@ -1,4 +1,4 @@
-import homeKg from '@/public/images/homekg.jpg';
+import homeKg from '../../public/images/homekg.jpg';
 import styles from './HomeSection.module.css';
 
 export default function HomeSection() {
