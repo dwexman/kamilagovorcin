@@ -1,0 +1,142 @@
+/* ---------- Sección general ---------- */
+.wrapper{
+  background:#1b1b1b;
+  padding:3rem 1rem;
+  display:flex;flex-direction:column;align-items:center;
+}
+.sectionTitle{
+  color:#f3dd15;
+  font-size:clamp(2rem,5vw,3rem);
+  margin-bottom:2rem;text-transform:uppercase;
+}
+
+/* ---------- Carcasa CDJ ---------- */
+.cdj{
+  width:400px;                     
+  background:#181818;
+  border:4px solid #6a6a6a;
+  border-radius:12px;
+  padding:1rem;box-sizing:border-box;
+  display:grid;
+  grid-template-rows:120px 40px auto;
+  grid-template-columns:65px 1fr 80px; 
+  gap:.7rem;box-shadow:inset 0 0 15px #000;
+}
+
+
+.screen{
+  grid-column:1/4;
+  position:relative;
+  background:#050505;
+  border:2px solid #252525;
+  border-radius:6px;overflow:hidden;
+}
+
+/* contenedor desplazable */
+.track{
+  position:absolute;top:6px;left:8px;right:8px;
+  overflow:hidden;white-space:nowrap;
+  font-family:"Courier New",monospace;
+  font-size:1rem;                       
+  display:flex;                        
+}
+
+.marquee{
+  animation:scroll 14s linear infinite;
+}
+@keyframes scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-100%)}
+}
+
+
+.wave{
+  position:absolute;left:0;right:0;bottom:0;height:60%;
+  background:
+    repeating-linear-gradient(to right,#007bff 0 2px,#007bff 2px 4px,transparent 4px 8px),
+    repeating-linear-gradient(to right,#ff8200 0 2px,#ff8200 2px 4px,transparent 4px 8px);
+  background-size:12px 50%;background-position:0 0,0 100%;
+  animation:wave 2.5s linear infinite;
+}
+@keyframes wave{from{background-position-x:0,0}to{background-position-x:-120px,-120px}}
+.embed{position:absolute;inset:0;border:none}
+
+/* ---------- CUE decorativo ---------- */
+.hotRow{grid-column:1/4;display:flex;gap:4px}
+.hot{flex:1;height:28px;border:none;border-radius:4px;background:#242424}
+
+/* ---------- Columna Izquierda ---------- */
+.left{
+  grid-row:3;grid-column:1;
+  display:flex;flex-direction:column;justify-content:flex-end;gap:1rem;padding-bottom:.3rem;
+}
+.play,.cue{
+  width:56px;                           
+  height:56px;border-radius:50%;
+  border:2px solid #202020;position:relative;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.07),
+             inset 0 -2px 4px rgba(0,0,0,.6);
+}
+/* PLAY */
+.play{cursor:pointer;background:#00c853;box-shadow:0 0 7px #00c853}
+.play::before{
+  content:'';position:absolute;
+  left:50%;top:50%;transform:translate(-40%,-50%);
+  border-top:10px solid transparent;
+  border-bottom:10px solid transparent;
+  border-left:16px solid #fff;
+}
+.playing{background:#e53935;box-shadow:0 0 7px #e53935}
+.playing::before{
+  border:none;width:6px;height:18px;
+  background:#fff;box-shadow:9px 0 0 #fff;
+  transform:translate(-55%,-50%);
+}
+/* CUE */
+.cue{background:#424242}
+.cue::before{
+  content:'CUE';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-size:.6rem;font-weight:700;color:#fff;
+}
+
+/* ---------- Jog wheel ---------- */
+.jogWrap{grid-row:3;grid-column:2;display:flex;justify-content:center;align-items:center}
+.jog{
+  width:190px;height:190px;        
+  border-radius:50%;border:10px solid #2a2a2a;background:#0d0d0d;
+  position:relative;animation:spin 6s linear infinite;
+  animation-play-state:var(--spin,paused);
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.jog::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:repeating-conic-gradient(transparent 0 15deg,#2a2a2a 15deg 30deg)
+}
+.jog::after{
+  content:'';position:absolute;inset:34%;border-radius:50%;
+  background:#ff005c;box-shadow:0 0 7px #ff005c,inset 0 0 9px #000
+}
+
+/* ---------- Columna Derecha ---------- */
+.right{
+  grid-row:3;grid-column:3;display:flex;flex-direction:column;align-items:center;gap:.6rem;
+}
+.browse{
+  width:52px;height:52px;
+  border-radius:50%;border:2px solid #2a2a2a;cursor:pointer;
+  background:radial-gradient(circle at 30% 30%,#3a3a3a,#1a1a1a);
+  box-shadow:0 2px 6px rgba(0,0,0,.6),inset 0 1px 3px rgba(255,255,255,.05);
+}
+.browse:active{transform:scale(.9) rotate(20deg)}
+.fader{
+  width:18px;height:190px;border:2px solid #2a2a2a;border-radius:8px;
+  background:#0f0f0f;position:relative;box-shadow:inset 0 0 5px #000
+}
+.faderKnob{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:20px;height:6px;background:#ececec;border-radius:3px;
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:420px){ .cdj{transform:scale(.9)} }

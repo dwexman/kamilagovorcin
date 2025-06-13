@@ -11,7 +11,6 @@
   position: relative; 
 }
 
-/* Marco de imagen */
 .imageFrame {
   background-color: #F3DD15;
   padding: 0.75rem;
@@ -57,7 +56,6 @@
   border-bottom-right-radius: 10px;
 }
 
-/* Sección de texto */
 .horizontalName {
   margin-left: -1rem;
   margin-top: -1rem;
@@ -85,8 +83,7 @@
 }
 
 /* ---------------------------------------------------------- */
-/* RESPONSIVE PARA MÓVIL (≤ 768 px) — quita paneles y añade   */
-/* borde amarillo + tablero en la propia foto                 */
+/* RESPONSIVE PARA MÓVIL (≤ 768 px)   */
 /* ---------------------------------------------------------- */
 @media (max-width: 768px) {
   .homeWrapper {
@@ -106,7 +103,6 @@
     display: none;
   }
 
-  /* Imagen ocupa todo el ancho + nuevo borde */
   .imageFrame {
     background: none;
     padding: 0;
@@ -123,7 +119,6 @@
     position: relative;
   }
 
-  /* Borde derecho a cuadros como pseudo-elemento */
   .imageInner::after {
     content: "";
     position: absolute;
